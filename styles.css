@@ -1,7 +1,15 @@
-/* General Styles */
+/* ===============================
+   Base Styles
+=============================== */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background-color: #fdfdfd;
+  color: #333;
 }
 
 img {
@@ -13,7 +21,9 @@ h4, p {
   margin: 5px 0;
 }
 
-/* Header */
+/* ===============================
+   Header
+=============================== */
 header {
   background: orange;
   padding: 10px;
@@ -39,11 +49,27 @@ header {
 }
 
 .cart {
+  position: relative;
   font-size: 24px;
-  color: black;
+  color: white;
+  cursor: pointer;
 }
 
-/* Navigation */
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+/* ===============================
+   Navigation
+=============================== */
 nav ul {
   list-style: none;
   display: flex;
@@ -63,19 +89,22 @@ nav li {
 }
 
 nav ul li.active {
-  color: rgb(255, 255, 255);
+  color: white;
   background-color: orange;
 }
 
-/* Banner Section */
+/* ===============================
+   Banner
+=============================== */
 .banner {
-  
   background: #ffe0b2;
   text-align: center;
   padding: 50px 20px;
 }
 
-/* Product Grid */
+/* ===============================
+   Product Grid & Cards
+=============================== */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -98,21 +127,22 @@ nav ul li.active {
   cursor: pointer;
 }
 
-
 .product-card:hover {
   transform: scale(1.03);
 }
 
 .product-card img {
   width: 100%;
-  height: 180px;              /* Fixed height for uniformity */
-  object-fit: contain;        /* Keeps aspect ratio, adds letterboxing if needed */
-  background-color: #fff;     /* Optional: white background for images */
-  /* padding: 10px;              /* Optional: spacing inside */
+  height: 180px;
+  object-fit: contain;
+  background-color: #fff;
+  padding: 10px;
   border-radius: 6px;
 }
 
-/* Modal */
+/* ===============================
+   Modal
+=============================== */
 .modal {
   display: none;
   position: fixed;
@@ -155,45 +185,154 @@ nav ul li.active {
   color: black;
 }
 
-.social-icons i,
-.icons-row i {
-  font-size: 20px;
-  margin-right: 10px;
-  color: #ccc;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.social-icons i:hover,
-.icons-row i:hover {
-  color: orange;
-}
-
-.app-buttons a {
-  display: inline-block;
-  background: #333;
-  color: white;
-  padding: 8px 12px;
-  margin: 5px 5px 0 0;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-.app-buttons a i {
-  margin-right: 8px;
-}
-
-
-/* Footer 
-footer {
-  text-align: center;
+/* ===============================
+   Cart Sidebar
+=============================== */
+.cart-sidebar {
+  position: fixed;
+  right: -400px;
+  top: 0;
+  width: 350px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
   padding: 20px;
-  background: #eee;
-  font-size: 14px;
-  color: #444;
-} */
-/* Footer */
+  z-index: 999;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+}
 
+.cart-sidebar.open {
+  right: 0;
+}
+
+.cart-sidebar h3 {
+  margin-top: 0;
+}
+
+.cart-sidebar button {
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: orange;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cart-sidebar button:hover {
+  background: darkorange;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cart-item div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-item button {
+  padding: 3px 7px;
+  font-size: 14px;
+  background: orange;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.cart-item button:hover {
+  background: darkorange;
+}
+
+/* ===============================
+   Checkout Page & Invoice
+=============================== */
+.checkout-page,
+.invoice {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  overflow-y: auto;
+  z-index: 10000;
+}
+
+.invoice {
+  z-index: 10001;
+}
+
+.summary-box {
+  margin-top: 20px;
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.checkout-page button,
+.invoice button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: orange;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.checkout-page button:hover,
+.invoice button:hover {
+  background: darkorange;
+}
+
+.invoice h2 {
+  margin-top: 0;
+}
+
+.invoice .summary-box {
+  margin-top: 20px;
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Print Styles */
+@media print {
+  .cart-sidebar,
+  .checkout-page,
+  .back-to-top,
+  header,
+  nav,
+  footer,
+  .product-grid,
+  .modal {
+    display: none !important;
+  }
+
+  .invoice {
+    display: block !important;
+  }
+
+  .invoice button {
+    display: none;
+  }
+}
+
+/* ===============================
+   Footer
+=============================== */
 .main-footer {
   background: #1a1a1a;
   color: #fff;
@@ -229,18 +368,30 @@ footer {
   color: orange;
 }
 
-.app-buttons img {
-  width: 140px;
-  margin: 10px 5px 0 0;
-  gap: 10px;
+.app-buttons a {
+  display: inline-block;
+  background: #333;
+  color: white;
+  padding: 8px 12px;
+  margin: 5px 5px 0 0;
+  border-radius: 5px;
+  text-decoration: none;
 }
 
-.social-icons span {
+.app-buttons a i {
+  margin-right: 8px;
+}
+
+.social-icons i {
   font-size: 20px;
   margin-right: 10px;
-  margin-top: 10px;
   color: #ccc;
   cursor: pointer;
+  transition: color 0.3s;
+}
+
+.social-icons i:hover {
+  color: orange;
 }
 
 .footer-cert-pay {
@@ -253,28 +404,6 @@ footer {
 
 .footer-cert-pay h4 {
   margin-bottom: 10px;
-}
-
-.icons-row img {
-  margin: 5px 10px 0 0;
-  background: #fff;
-  padding: 5px;
-  border-radius: 4px;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 30px;
-  border-top: 1px solid #333;
-  padding-top: 15px;
-  font-size: 13px;
-  color: #aaa;
-}
-
-.footer-bottom a {
-  color: #aaa;
-  margin: 0 5px;
-  text-decoration: underline;
 }
 
 .icons-row {
@@ -299,9 +428,56 @@ footer {
   color: #fff;
 }
 
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 13px;
+  color: #aaa;
+}
 
+.footer-bottom a {
+  color: #aaa;
+  margin: 0 5px;
+  text-decoration: underline;
+}
 
-/* Responsive Adjustments */
+/* ===============================
+   Back to Top Button
+=============================== */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  background-color: orange;
+  padding: 10px 15px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.back-to-top a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.back-to-top a i {
+  margin-right: 8px;
+}
+
+.back-to-top:hover {
+  background-color: #e65100;
+}
+
+/* ===============================
+   Responsive Styles
+=============================== */
 @media (max-width: 600px) {
   header {
     flex-direction: column;
@@ -320,4 +496,62 @@ footer {
   .modal-content {
     margin-top: 30%;
   }
+}
+.add-btn {
+  padding: 8px 12px;
+  background: orange;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+  background: darkorange;
+}
+
+.add-btn {
+  padding: 8px 12px;
+  background: orange;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+  background: darkorange;
+}
+
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cart-item div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-item button {
+  padding: 3px 7px;
+  font-size: 14px;
+  background: orange;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.cart-item button:hover {
+  background: darkorange;
 }

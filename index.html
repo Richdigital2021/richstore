@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Richstore | Nigeria's Best Deals Online</title>
 
-  <title>RICHSTORE WEBSITE</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <!-- Styles & Fonts -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
-  <!-- Header Section -->
+  <!-- Header -->
   <header>
     <div class="logo">RICHSTORE</div>
-    <input type="text" placeholder="Search products..." id="searchBox"/>
-    <div class="cart">🛒</div>
+    <input type="text" id="searchBox" placeholder="Search products..." aria-label="Search Products" />
+    <div class="cart" onclick="openCart()" aria-label="View Cart">
+      🛒 <span id="cartCount" class="cart-count">0</span>
+    </div>
   </header>
 
-  <!-- Navigation / Categories -->
+  <!-- Navigation -->
   <nav>
     <ul id="categoryFilter">
       <li data-category="all" class="active">All</li>
@@ -32,145 +35,160 @@
 
   <!-- Banner -->
   <section class="banner">
-    <h1>Welcome to Rich Store</h1>
+    <h1>Welcome to Richstore</h1>
     <p>Discover great deals every day!</p>
   </section>
 
   <!-- Product Grid -->
-  <section class="product-grid" id="productGrid">
-    <!-- Products will be rendered here by JavaScript -->
+  <section id="productGrid" class="product-grid">
+    <!-- JavaScript will render products here -->
   </section>
 
-  <!-- Product Detail Modal -->
-  <div id="productModal" class="modal">
+  <!-- Product Modal -->
+  <div id="productModal" class="modal" role="dialog" aria-modal="true">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <img id="modalImage" src="" alt="" />
+      <span class="close" role="button" aria-label="Close Product Details">&times;</span>
+      <img id="modalImage" src="" alt="Product Preview" />
       <h4 id="modalName"></h4>
       <p id="modalPrice"></p>
       <p id="modalDescription"></p>
     </div>
   </div>
 
+  <!-- Cart Sidebar -->
+  <aside id="cartSidebar" class="cart-sidebar" aria-label="Shopping Cart">
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <p id="cartTotal"><strong>Total:</strong> ₦0</p>
+    <button onclick="checkout()">Checkout</button>
+    <button onclick="closeCart()">Close</button>
+  </aside>
+
+  <!-- Checkout Page -->
+  <section id="checkoutPage" class="checkout-page" aria-label="Checkout Summary">
+    <h2>Checkout Summary</h2>
+    <div id="checkoutItems"></div>
+
+    <div class="summary-box">
+      <p>Subtotal: <span id="checkoutSubtotal">₦0</span></p>
+      <p>VAT (7.5%): <span id="checkoutVAT">₦0</span></p>
+      <p>Discount (10% if over ₦100,000): <span id="checkoutDiscount">₦0</span></p>
+      <h3>Total: <span id="checkoutTotal">₦0</span></h3>
+    </div>
+
+    <button onclick="confirmOrder()">Place Order</button>
+    <button onclick="closeCheckout()">Cancel</button>
+  </section>
+
+  <!-- Printable Invoice -->
+  <section id="invoice" class="invoice" aria-label="Printable Invoice">
+    <h2>Richstore - Invoice</h2>
+    <div id="invoiceItems"></div>
+
+    <div class="summary-box">
+      <p>Subtotal: <span id="invoiceSubtotal">₦0</span></p>
+      <p>VAT (7.5%): <span id="invoiceVAT">₦0</span></p>
+      <p>Discount (10%): <span id="invoiceDiscount">₦0</span></p>
+      <h3>Total: <span id="invoiceTotal">₦0</span></h3>
+    </div>
+
+    <p>Thank you for shopping with Richstore!</p>
+    <button onclick="window.print()">🖨 Print Invoice</button>
+    <button onclick="closeInvoice()">Close</button>
+  </section>
+
   <!-- Footer -->
-
   <footer class="main-footer">
-  <div class="footer-columns">
-    <div class="footer-col">
-      <h4>Company info</h4>
-      <ul>
-        <li>About Richstore</li>
-        <li>Affiliate & Influencer: Earn Commission</li>
-        <li>Contact us</li>
-        <li>Careers</li>
-        <li>Press</li>
-        <li>Tree Planting Program</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Customer service</h4>
-      <ul>
-        <li>Return and refund policy</li>
-        <li>Intellectual property policy</li>
-        <li>Shipping info</li>
-        <li>Report suspicious activity</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Help</h4>
-      <ul>
-        <li>Support center & FAQ</li>
-        <li>Safety center</li>
-        <li>Purchase protection</li>
-        <li>Sitemap</li>
-        <li>Partner with us</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Download the App</h4>
-      <ul class="app-features">
-        <li>📉 Price-drop alerts</li>
-        <li>🚚 Track orders</li>
-        <li>🔐 Secure checkout</li>
-        <li>⌛ Low stock alerts</li>
-        <li>🎟 Coupons & offers</li>
-      </ul>
-      <!--<div class="app-buttons">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Available_on_the_App_Store_(black)_SVG.svg" alt="App Store" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" />
-      </div> -->
-      <div class="app-buttons">
-        <a href="#"><i class="fab fa-apple"></i> App Store</a>
-        <a href="#"><i class="fab fa-google-play"></i> Google Play</a>
-      </div><br>
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h4>Company Info</h4>
+        <ul>
+          <li>About Richstore</li>
+          <li>Affiliate & Influencer Program</li>
+          <li>Contact Us</li>
+          <li>Careers</li>
+          <li>Press</li>
+          <li>Tree Planting Program</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Service</h4>
+        <ul>
+          <li>Return & Refund Policy</li>
+          <li>Intellectual Property Policy</li>
+          <li>Shipping Info</li>
+          <li>Report Suspicious Activity</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li>Support Center & FAQ</li>
+          <li>Safety Center</li>
+          <li>Purchase Protection</li>
+          <li>Sitemap</li>
+          <li>Partner With Us</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Download the App</h4>
+        <ul class="app-features">
+          <li>📉 Price-drop alerts</li>
+          <li>🚚 Track orders</li>
+          <li>🔐 Secure checkout</li>
+          <li>⌛ Low stock alerts</li>
+          <li>🎟 Coupons & offers</li>
+        </ul>
 
-
-      <div class="social-icons">
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-facebook-f"></i>
-        <i class="fab fa-x-twitter"></i>
-        <i class="fab fa-tiktok"></i>
-        <i class="fab fa-youtube"></i>
-        <i class="fab fa-pinterest-p"></i>
-     </div>
-
-     <!-- <div class="social-icons">
-        <span>📷</span><span>📘</span><span>🕊</span><span>🎵</span><span>▶</span><span>📌</span>
-      </div> -->
-    </div>
-  </div>
-
-  <div class="footer-cert-pay">
-    <div>
-      <h4>Security certification</h4>
-   
-        <div class="icons-row">
-            <i class="fas fa-shield-alt" title="SSL Secure"></i>
-            <i class="fas fa-lock" title="ID Verified"></i>
-            <i class="fas fa-user-check" title="Safe Identity"></i>
-            <i class="fas fa-shield-virus" title="Protection Guaranteed"></i>
+        <div class="app-buttons">
+          <a href="#"><i class="fab fa-apple"></i> App Store</a>
+          <a href="#"><i class="fab fa-google-play"></i> Google Play</a>
         </div>
-    </div>
 
-      
-      <!-- <div class="icons-row">
-        <img src="https://dummyimage.com/60x30/ccc/000&text=SSL" />
-        <img src="https://dummyimage.com/60x30/ccc/000&text=Visa" />
-        <img src="https://dummyimage.com/60x30/ccc/000&text=ID" />
-        <img src="https://dummyimage.com/60x30/ccc/000&text=Secure" />
-      </div> -->    
-  
-     <div>
-      <h4>We accept</h4>
-      <div class="icons-row">
-        <i class="fab fa-cc-visa"></i>
-        <i class="fab fa-cc-mastercard"></i>
-        <i class="fab fa-cc-amex"></i>
-        <i class="fab fa-cc-paypal"></i>
-        <i class="fab fa-cc-apple-pay"></i>
-        <i class="fab fa-cc-discover"></i>
-      </div>
-
-      
-      <!-- <div class="icons-row">
-        <img src="https://dummyimage.com/60x30/ccc/000&text=Verve" />
-        <img src="https://dummyimage.com/60x30/ccc/000&text=MasterCard" />
-        <img src="https://dummyimage.com/60x30/ccc/000&text=Visa" />
-        <img src="https://dummyimage.com/60x30/ccc/000&text=Pay" /> --->
+        <div class="social-icons">
+          <i class="fab fa-instagram" aria-label="Instagram"></i>
+          <i class="fab fa-facebook-f" aria-label="Facebook"></i>
+          <i class="fab fa-x-twitter" aria-label="Twitter"></i>
+          <i class="fab fa-tiktok" aria-label="TikTok"></i>
+          <i class="fab fa-youtube" aria-label="YouTube"></i>
+          <i class="fab fa-pinterest-p" aria-label="Pinterest"></i>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="footer-bottom">
-    <p>&copy; 2025 Richstore. | <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Choices</a></p>
-  </div>
-</footer>
-
-    <!-- Back to Top Button -->
-    <div class="back-to-top">
-      <a href="#top"><i class="fas fa-chevron-up"></i> Back to Top</a>
+    <div class="footer-cert-pay">
+      <div>
+        <h4>Security Certification</h4>
+        <div class="icons-row">
+          <i class="fas fa-shield-alt" title="SSL Secure"></i>
+          <i class="fas fa-lock" title="ID Verified"></i>
+          <i class="fas fa-user-check" title="Safe Identity"></i>
+          <i class="fas fa-shield-virus" title="Protection Guaranteed"></i>
+        </div>
+      </div>
+      <div>
+        <h4>We Accept</h4>
+        <div class="icons-row">
+          <i class="fab fa-cc-visa"></i>
+          <i class="fab fa-cc-mastercard"></i>
+          <i class="fab fa-cc-amex"></i>
+          <i class="fab fa-cc-paypal"></i>
+          <i class="fab fa-cc-apple-pay"></i>
+          <i class="fab fa-cc-discover"></i>
+        </div>
+      </div>
     </div>
-   
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Richstore. | <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Choices</a></p>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <div class="back-to-top">
+    <a href="#top"><i class="fas fa-chevron-up"></i> Back to Top</a>
+  </div>
+
   <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
